@@ -1,49 +1,27 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import WorldList from "./WorldList";
+import SingleWorld from './SingleWorld';
 
 
-const Routes = () => {
+const Router = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <nav>
           Welcome!
+          <Link to ='/worlds'>World List</Link>
         </nav>
         <main>
-          <WorldList />
+          {/* <WorldList />  */}
         </main>
+        <Routes>
+          <Route exact path="/worlds" element={<WorldList />} />
+          <Route path='/worlds/:worldId' element={<SingleWorld />} />
+        </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 };
 
-// class App extends Component {
-//     constructor(props) {
-//       super(props);
-//       this.state = { apiResponse: "" };
-//     }
-//     callAPI() {
-//       fetch("http://localhost:1337/testAPI")
-//         .then(res => res.text())
-//         .then(res => this.setState({ apiResponse: res }));
-//     }
-//     componentDidMount() {
-//       this.callAPI();
-//     }
-  
-//     render() {
-//       return (
-//         <div className="App">
-//           <header className="App-header">
-//             <img src={logo} className="App-logo" alt="logo" />
-//             <p className="App-intro">
-//               {this.state.apiResponse}
-//             </p>
-//           </header>
-//         </div>
-//       );
-//     }
-//   }
-
-export default Routes;
+export default Router;

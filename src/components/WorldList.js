@@ -11,9 +11,9 @@ export class WorldList extends React.Component {
         <p>Worlds:</p>
         {this.props.worlds.map(world => (
           <div key={world.id}>
-            <Link to ={`/worlds/${world.slug}`}>
+            <Link to ={`/worlds/${world.id}`}>
               <p>{world.Name}</p>
-              {/* <img src={world.imageUrl} /> */}
+              <img src={world.imageUrl} />
             </Link>
           </div>
         ))}
