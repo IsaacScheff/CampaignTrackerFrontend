@@ -21,7 +21,7 @@ export function SingleWorld () {
         <div>
             component loaded
             world {worldId}
-            <p>Name: {world.Name}</p>
+            <p>Name: {world.name}</p>
             <img src={world.imageUrl}/>
             <p>Description: {world.description}</p>
             {/* See posts button? */}

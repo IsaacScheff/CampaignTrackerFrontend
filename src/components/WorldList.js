@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchWorlds } from "../redux/worlds";
 import { Link } from "react-router-dom";
+import WorldForm from "./WorldForm";
 
 
 export class WorldList extends React.Component {
@@ -12,11 +13,12 @@ export class WorldList extends React.Component {
         {this.props.worlds.map(world => (
           <div key={world.id}>
             <Link to ={`/worlds/${world.id}`}>
-              <p>{world.Name}</p>
+              <p>{world.name}</p>
               <img src={world.imageUrl} />
             </Link>
           </div>
         ))}
+        <WorldForm />
       </div>
     )
   }
