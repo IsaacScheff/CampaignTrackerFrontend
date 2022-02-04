@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "../redux/posts";
 import {  useParams  } from "react-router-dom";
 import { Link } from "react-router-dom";
+import PostForm from "./PostForm";
 //import UpdateWorld from "./UpdateWorld";
 
 
@@ -31,6 +32,7 @@ export function Posts () {
             </div>
             ))
         }
+            <PostForm />
         </div>
     )
 }
