@@ -32,9 +32,9 @@ const WorldForm = () => {
             case 'description':
                 setWorldDescription(event.target.value);
                 break;
-            case 'imageUrl':
-                setWorldImage(event.target.value);
-                break;  
+            // case 'imageUrl':
+            //     setWorldImage(event.target.value);
+            //     break;  
             default:
                 console.log("onChange non selected value");
         }
@@ -50,7 +50,7 @@ const WorldForm = () => {
         const world = {
             name: worldName,
             description: worldDescription,
-            imageUrl: worldImage,
+            //imageUrl: worldImage,
             UserId: 1,                 //needs to be changed to grab actual user ID
         }
         console.log(world);
@@ -62,16 +62,16 @@ const WorldForm = () => {
             onSubmit={onSubmit}
         >
 
-            <label htmlFor="name">Title</label>
+            <label htmlFor="name">Name</label>
             <input name="name" onChange={onChange} />
             <p>
-                <label htmlFor="description">Content</label>
+                <label htmlFor="description">Description</label>
                 <input name="description" onChange={onChange} />
             </p>
-            <p>
+            {/* <p>
                 <label htmlFor="imageUrl">ImageUrl</label>
                 <input name="imageUrl" onChange={onChange} />
-            </p>
+            </p> */}
             <div className="actions">
                 <button type="submit" disabled={worldName.length < 1}>
                     Create!

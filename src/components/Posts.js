@@ -18,6 +18,8 @@ export function Posts () {
         dispatch(fetchPosts(worldId))
     }, [])
     
+    if(posts){
+    console.log(posts);
     return (
         <div id='posts' className='column'>
         {
@@ -35,6 +37,13 @@ export function Posts () {
             <PostForm />
         </div>
     )
+    }else{
+        return(
+            <div>
+                posts here
+            </div>
+        )
+    }
 }
 
 export default Posts;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchComments } from "../redux/comments";
+import { fetchComments, deleteComment } from "../redux/comments";
 import {  useParams  } from "react-router-dom";
 //import UpdateWorld from "./UpdateWorld";
 
@@ -21,6 +21,8 @@ export function Comments () {
         {
             posts.map(comment => (
              <div className='comment' key={comment.id}>
+                  <button className='remove'
+                    onClick={() => dispatch(deleteComment(comment.id))}>X</button>
                 <p>{comment.content}</p>
             </div>
             ))
