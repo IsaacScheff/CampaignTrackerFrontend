@@ -1,0 +1,96 @@
+import React, { useState, useRef } from "react";
+import cn from "classnames";
+import { createComment } from "../redux/comments";
+import { useDispatch, useSelector } from "react-redux";
+import {  useParams  } from "react-router-dom";
+
+const INITIAL_HEIGHT = 46;
+
+const CommentForm = () => {
+
+    const dispatch = useDispatch();
+    const [isExpanded, setIsExpanded] = useState(false);
+    const [commentValue, setCommentValue] = useState("");
+  
+    const outerHeight = useRef(INITIAL_HEIGHT);
+    const textRef = useRef(null);
+    const containerRef = useRef(null);
+
+    let { postId } = useParams();
+  
+    const onExpand = () => {
+		if (!isExpanded) {
+            outerHeight.current = containerRef.current.scrollHeight;
+            setIsExpanded(true);
+        }
+	}
+
+    const onChange = (event) => {
+        setCommentValue(event.target.value);
+    }
+
+    const onClose = () => {
+        setCommentValue("");
+        setIsExpanded(false);
+    };
+
+    const onSubmit = (event) => {
+        event.preventDefault();
+        const comment = {
+            content: commentValue,
+            UserId: 1,                 //needs to be changed to grab actual user ID
+            PostId: postId
+        }
+        console.log(comment);
+        dispatch(createComment(comment));
+    }
+
+    return (
+        <form
+            onSubmit={onSubmit}
+            ref={containerRef}
+            className={cn("comment-box", {
+                expanded: isExpanded,
+                collapsed: !isExpanded,
+			    modified: commentValue.length > 0,
+            })}
+            style={{
+                minHeight: isExpanded ? outerHeight.current : INITIAL_HEIGHT
+            }}
+        >
+            {/* <div className="header">
+                <div className="user">
+                    <img
+                        src="avatar/path"
+                        alt="User avatar"
+                    />
+                    <span>User Name</span>
+                </div>
+            </div> */}
+
+            <label htmlFor="comment">Comment?</label>
+            <textarea
+                ref={textRef}
+                onClick={onExpand}
+                onFocus={onExpand}
+                onChange={onChange}
+                className="comment-field"
+                placeholder="Comment?"
+                value={commentValue}
+                name="comment"
+                id="comment"
+            />
+            <div className="actions">
+                <button type="button" className="cancel" onClick={onClose}>
+                    Cancel
+                </button>
+                <button type="submit" disabled={commentValue.length < 1}>
+                    Respond
+                </button>
+            </div>
+	
+	    </form>
+    );
+  };
+  
+  export default CommentForm;

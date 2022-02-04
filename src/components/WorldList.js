@@ -8,7 +8,7 @@ export class WorldList extends React.Component {
   render() {
     return (
       <div>
-        <p>Worlds:</p>
+        <p>Campaigns:</p>
         {this.props.worlds.map(world => (
           <div key={world.id}>
             <Link to ={`/worlds/${world.id}`}>
