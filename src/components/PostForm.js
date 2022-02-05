@@ -44,10 +44,13 @@ const PostForm = () => {
         }
     }
 
-    // const onClose = () => {
-    //     setCommentValue("");
-    //     setIsExpanded(false);
-    // };
+    const onClose = () => {
+        setPostType("");
+        setPostTitle("");
+        setPostImage("");
+        setPostContent("");
+        //setIsExpanded(false);
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -56,11 +59,11 @@ const PostForm = () => {
             type: postType,
             title: postTitle,
             imageUrl: postImage,
-            UserId: 1,                 //needs to be changed to grab actual user ID
+            UserId: 1,              
             WorldId: worldId,
         }
-        console.log(post);
         dispatch(createPost(post));
+        onClose();
     }
 
     return (
@@ -69,20 +72,20 @@ const PostForm = () => {
         >
 
             <label htmlFor="title">Title</label>
-            <input name="title" onChange={onChange} />
+            <input name="title" onChange={onChange} value={postTitle}/>
             <p>
                 <label htmlFor="content">Content</label>
-                <input name="content" onChange={onChange} />
+                <input name="content" onChange={onChange} value={postContent}/>
             </p>
             <p>
                 <label htmlFor="type">Category</label>
-                <input name="type" onChange={onChange} />
+                <input name="type" onChange={onChange} value={postType}/>
             </p>
             <p>
                 <label htmlFor="imageUrl">ImageUrl</label>
-                <input name="imageUrl" onChange={onChange} />
+                <input name="imageUrl" onChange={onChange} value={postImage}/>
             </p>
-            <div className="actions">
+            <div>
                 <button type="submit" disabled={postTitle.length < 1 || postContent.length < 1 || postType.length < 1}>
                     Post!
                 </button>

@@ -19,17 +19,13 @@ export function SinglePost () {
     const [postType, setPostType] = useState(post.type);
     const [postTitle, setPostTitle] = useState(post.title);
     const [postImage, setPostImage] = useState(post.imageUrl);
-    const [rerender, setRerender] = useState(false);
 
     let { postId } = useParams();
     let { worldId } = useParams();
 
     useEffect(()=>{
-        console.log(rerender);
-        console.log(post);
         dispatch(fetchSinglePost(postId))
-        //setRerender(!rerender);
-    }, [dispatch, postId, rerender]);
+    }, [dispatch, postId]);
 
     const onChange = (event) => {
         switch (event.target.name){
@@ -64,8 +60,6 @@ export function SinglePost () {
         console.log(post);
         dispatch(updatePost(post));
         setUpdateForm(false);
-        setRerender(!rerender);
-        console.log(rerender);
     }
     
     if(!updateForm){
@@ -104,7 +98,7 @@ export function SinglePost () {
                             <label htmlFor="imageUrl">ImageUrl</label>
                             <input name="imageUrl" onChange={onChange} />
                         </p>
-                        <div className="actions">
+                        <div>
                             <button type="submit">
                                 Update
                             </button>

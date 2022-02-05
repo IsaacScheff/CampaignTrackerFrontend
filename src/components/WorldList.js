@@ -11,7 +11,7 @@ export class WorldList extends React.Component {
       <div>
         <p>Campaigns:</p>
         {this.props.worlds.map(world => (
-          <div key={world.id}>
+          <div key={world.id} className="world-list">
             <Link to ={`/worlds/${world.id}`}>
               <p>{world.name}</p>
               <img src={world.imageUrl} />

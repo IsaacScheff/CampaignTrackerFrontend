@@ -3,6 +3,7 @@ import cn from "classnames";
 import { createComment } from "../redux/comments";
 import { useDispatch, useSelector } from "react-redux";
 import {  useParams  } from "react-router-dom";
+import heightField from "../heightField";
 
 const INITIAL_HEIGHT = 46;
 
@@ -15,6 +16,8 @@ const CommentForm = () => {
     const outerHeight = useRef(INITIAL_HEIGHT);
     const textRef = useRef(null);
     const containerRef = useRef(null);
+
+    heightField(textRef, commentValue);
 
     let { postId } = useParams();
   
@@ -38,11 +41,12 @@ const CommentForm = () => {
         event.preventDefault();
         const comment = {
             content: commentValue,
-            UserId: 1,                 //needs to be changed to grab actual user ID
+            UserId: 1,               
             PostId: postId
         }
         console.log(comment);
         dispatch(createComment(comment));
+        onClose();
     }
 
     return (

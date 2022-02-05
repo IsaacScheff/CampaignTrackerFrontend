@@ -40,10 +40,11 @@ const WorldForm = () => {
         }
     }
 
-    // const onClose = () => {
-    //     setCommentValue("");
-    //     setIsExpanded(false);
-    // };
+    const onClose = () => {
+        setWorldName("");
+        setWorldDescription("");
+        //setIsExpanded(false);
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -51,10 +52,10 @@ const WorldForm = () => {
             name: worldName,
             description: worldDescription,
             //imageUrl: worldImage,
-            UserId: 1,                 //needs to be changed to grab actual user ID
+            UserId: 1,                 
         }
-        console.log(world);
         dispatch(createWorld(world));
+        onClose();
     }
 
     return (
@@ -63,16 +64,16 @@ const WorldForm = () => {
         >
 
             <label htmlFor="name">Name</label>
-            <input name="name" onChange={onChange} />
+            <input name="name" onChange={onChange} value={worldName}/>
             <p>
                 <label htmlFor="description">Description</label>
-                <input name="description" onChange={onChange} />
+                <input name="description" onChange={onChange} value={worldDescription}/>
             </p>
             {/* <p>
                 <label htmlFor="imageUrl">ImageUrl</label>
                 <input name="imageUrl" onChange={onChange} />
             </p> */}
-            <div className="actions">
+            <div>
                 <button type="submit" disabled={worldName.length < 1}>
                     Create!
                 </button>
