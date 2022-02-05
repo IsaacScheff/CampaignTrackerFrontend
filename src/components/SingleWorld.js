@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleWorld } from "../redux/singleWorld";
+import { deleteWorld } from "../redux/worlds";
 import {  useParams  } from "react-router-dom";
 import Posts from "./Posts";
 import { fetchPosts } from "../redux/posts";
+import { Link } from "react-router-dom";
 //import UpdateWorld from "./UpdateWorld";
 
 
@@ -26,6 +28,12 @@ export function SingleWorld () {
             <p>Description: {world.description}</p>
             {/* See posts button? */}
             <Posts />
+            <Link to ={`/worlds`}>
+                <button className='remove'
+                    onClick={() => dispatch(deleteWorld(world.id))}>
+                        Delete Campaign
+                </button>
+            </Link>
         </div>
         )
 

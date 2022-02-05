@@ -19,7 +19,6 @@ export function Posts () {
     }, [])
     
     if(posts){
-    console.log(posts);
     return (
         <div id='posts' className='column'>
         {

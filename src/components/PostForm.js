@@ -58,7 +58,6 @@ const PostForm = () => {
             imageUrl: postImage,
             UserId: 1,                 //needs to be changed to grab actual user ID
             WorldId: worldId,
-            slug: "slug"
         }
         console.log(post);
         dispatch(createPost(post));

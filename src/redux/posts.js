@@ -1,9 +1,9 @@
 import Axios from "axios";
 
 const SET_POSTS = 'SET_POSTS';
-// const SET_SINGLE_POSTS = 'SET_SINGLE_POSTS';
 const CREATE_POST = 'CREATE_POST';
 const DELETE_POST = 'DELETE_POST';
+const UPDATE_POST = 'UPDATE_POST';
 
 
 export const _createPost = (post) => ({
@@ -16,13 +16,13 @@ export const setPosts = (posts) => ({
   posts
 });
 
-// export const setSinglePost = (post) => ({
-//   type: SET_SINGLE_POSTS,
-//   post
-// });
-
 export const _deletePost = (post) => ({
   type: DELETE_POST,
+  post
+});
+
+export const _updatePost = (post) => ({
+  type: UPDATE_POST,
   post
 });
 
@@ -45,22 +45,19 @@ export const fetchPosts = (worldid) => async (dispatch) => {
   }
 }
 
-// export const fetchSinglePost = (id) => {
-//   console.log(id);
-//   return async (dispatch) => {
-//     try {
-//       const {data} = await Axios.get(`http://localhost:1337/posts/singlepost/${id}`);
-//       dispatch(setSinglePost(data));
-//     } catch (error) {
-//         console.log(error);
-//     }
-//   }
-// }
-
 export const deletePost = (postId) => async (dispatch) => {
   try {
     const {data: post} = await Axios.delete(`http://localhost:1337/posts/${postId}`);
     dispatch(_deletePost(post));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const updatePost = (post) => async(dispatch) => {
+  try {
+    const {data: updated} = await Axios.put(`http://localhost:1337/posts/${post.id}`, post);
+    dispatch(_updatePost(updated));
   } catch (error) {
     console.log(error);
   }
@@ -75,10 +72,14 @@ export default function postsReducer(state = initialState, action) {
       return action.posts;
     case CREATE_POST:
       return [...state, action.post];
-    // case SET_SINGLE_POSTS:
-    //   return action.post;
     case DELETE_POST:
       return state.filter((post) => post.id !== action.post.id);
+    // case UPDATE_POST:
+    //   return state.map((post) =>
+    //   post.id === action.post.id ? action.post : post
+    // );
+    // case UPDATE_POST:
+    //   return action.post;
     default:
       return state;
   };

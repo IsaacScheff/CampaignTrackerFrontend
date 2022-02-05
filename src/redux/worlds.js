@@ -2,6 +2,7 @@ import Axios from "axios";
 
 const SET_WORLDS = 'SET_WORLDS';
 const CREATE_WORLD = 'CREATE_WORLD';
+const DELETE_WORLD = 'DELETE_WORLD';
 
 
 export const _createWorld = (world) => ({
@@ -12,6 +13,11 @@ export const _createWorld = (world) => ({
 export const setWorlds = (worlds) => ({
   type: SET_WORLDS,
   worlds
+});
+
+export const _deleteWorld = (world) => ({
+  type: DELETE_WORLD,
+  world
 });
 
 export const createWorld = (world) => async(dispatch) => {
@@ -32,6 +38,15 @@ export const fetchWorlds = () => async (dispatch) => {
   }
 }
 
+export const deleteWorld = (worldId) => async (dispatch) => {
+  try {
+    const {data: world} = await Axios.delete(`http://localhost:1337/worlds/${worldId}`);
+    dispatch(_deleteWorld(world));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
 const initialState = []
 
@@ -41,6 +56,8 @@ export default function worldsReducer(state = initialState, action) {
       return action.worlds;
     case CREATE_WORLD:
       return [...state, action.world];
+    case DELETE_WORLD:
+      return state.filter((world) => world.id !== action.world.id);
     default:
       return state;
   };
