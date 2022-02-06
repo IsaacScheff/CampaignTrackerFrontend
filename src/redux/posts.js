@@ -1,10 +1,15 @@
 import Axios from "axios";
 
 const SET_POSTS = 'SET_POSTS';
+const SET_POSTS_BY_TYPE= 'SET_POSTS_BY_TYPE';
 const CREATE_POST = 'CREATE_POST';
 const DELETE_POST = 'DELETE_POST';
 const UPDATE_POST = 'UPDATE_POST';
 
+export const setPostsByType = (posts) => ({
+  type: SET_POSTS_BY_TYPE,
+  posts
+});
 
 export const _createPost = (post) => ({
   type: CREATE_POST,
@@ -25,6 +30,15 @@ export const _updatePost = (post) => ({
   type: UPDATE_POST,
   post
 });
+
+export const fetchPostsByType = (worldId, type) => async (dispatch) => {
+  try {
+    const {data} = await Axios.get(`http://localhost:1337/posts/types/${worldId}/${type}`);
+    dispatch(setPostsByType(data));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export const createPost = (post) => async(dispatch) => {
   try {
@@ -73,12 +87,8 @@ export default function postsReducer(state = initialState, action) {
       return [...state, action.post];
     case DELETE_POST:
       return state.filter((post) => post.id !== action.post.id);
-    // case UPDATE_POST:
-    //   return state.map((post) =>
-    //   post.id === action.post.id ? action.post : post
-    // );
-    // case UPDATE_POST:
-    //   return action.post;
+    case SET_POSTS_BY_TYPE:
+      return action.posts;
     default:
       return state;
   };

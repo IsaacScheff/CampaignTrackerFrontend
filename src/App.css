@@ -1,3 +1,5 @@
+html {background-color: #c2ab74}
+
 .App {
   text-align: center;
   background-color: #c2ab74;
@@ -145,12 +147,11 @@ comment-field {
 }
 
 .world-list {
-  border-top: 5px solid black;
-  border-bottom: 5px solid black;
-  border-left: 10px solid black;
-  border-right: 10px solid black;
+  border-radius: 10px;
+  border: 10px solid black;
   width: 65%;
   margin: auto;
+  margin-bottom: 20px;
   background-color: #E0D4B8;
 }
 
@@ -169,5 +170,32 @@ comment-field {
   font-family: fantasy;
   font-size: xx-large;
 }
+
+.campaign-image {
+  height: 50%;
+  width: 50%;
+  border-radius: 10%;
+}
+
+.post-image {
+  margin: auto;
+  height: 50%;
+  width: 50%;
+}
+
+.post {
+  margin: auto;
+  border-radius: 30px;
+  width: 70%;
+  background-color: #E0D4B8;
+  border: 3px solid gray;
+  margin-bottom: 5px;
+}
+
+/* .post-container {
+  margin-left: 7%;
+  display: flex;
+  flex-wrap: wrap;
+} */
 
 

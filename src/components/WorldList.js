@@ -18,7 +18,7 @@ export class WorldList extends React.Component {
           <div key={world.id} className="world-list">
             <Link to ={`/worlds/${world.id}`}>
               <p className='campaign-title'>{world.name}</p>
-              <img src={world.imageUrl} />
+              <img className="campaign-image" alt={world.description} src={world.imageUrl} />
             </Link>
             <p className='world-description'>
                 {world.description}

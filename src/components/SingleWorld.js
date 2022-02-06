@@ -68,7 +68,7 @@ export function SingleWorld () {
         return(
             <div>
                 <p className='campaign-title'>{world.name}</p>
-                <img src={world.imageUrl}/>
+                <img className="campaign-image" src={world.imageUrl}/>
                 <p>Description: {world.description}</p>
                 <button className='edit'
                     onClick={() => setUpdateForm(true)}>
