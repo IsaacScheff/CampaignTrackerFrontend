@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
-import cn from "classnames";
+import React, { useState } from "react";
 import { createPost } from "../redux/posts";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {  useParams  } from "react-router-dom";
 
 const PostForm = () => {
@@ -11,19 +10,8 @@ const PostForm = () => {
     const [postType, setPostType] = useState("");
     const [postTitle, setPostTitle] = useState("");
     const [postImage, setPostImage] = useState("");
-  
-    //const outerHeight = useRef(INITIAL_HEIGHT);
-    const textRef = useRef(null);
-    const containerRef = useRef(null);
 
     let { worldId } = useParams();
-  
-    // const onExpand = () => {
-	// 	if (!isExpanded) {
-    //         outerHeight.current = containerRef.current.scrollHeight;
-    //         setIsExpanded(true);
-    //     }
-	// }
 
     const onChange = (event) => {
         switch (event.target.name){
@@ -49,7 +37,6 @@ const PostForm = () => {
         setPostTitle("");
         setPostImage("");
         setPostContent("");
-        //setIsExpanded(false);
     };
 
     const onSubmit = (event) => {

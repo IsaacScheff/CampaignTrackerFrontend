@@ -140,8 +140,27 @@ comment-field {
 }
 
 .world-list {
-  border-style: groove;
-  width: 75%;
-  padding: 10px;
+  border-top: 5px solid black;
+  border-bottom: 5px solid black;
+  border-left: 10px solid black;
+  border-right: 10px solid black;
+  width: 65%;
   margin: auto;
+  background-color: #E0D4B8;
+}
+
+.navbar {
+  background-color: #81715c;
+  height: 26px;
+}
+
+.campaign-title {
+  font-family: fantasy;
+  font-size: x-large;
+  font-weight: bolder;
+}
+
+.world-list-header {
+  font-family: fantasy;
+  font-size: xx-large;
 }

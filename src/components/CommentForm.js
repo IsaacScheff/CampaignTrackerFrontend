@@ -62,15 +62,6 @@ const CommentForm = () => {
                 minHeight: isExpanded ? outerHeight.current : INITIAL_HEIGHT
             }}
         >
-            {/* <div className="header">
-                <div className="user">
-                    <img
-                        src="avatar/path"
-                        alt="User avatar"
-                    />
-                    <span>User Name</span>
-                </div>
-            </div> */}
 
             <label htmlFor="comment">Comment?</label>
             <textarea

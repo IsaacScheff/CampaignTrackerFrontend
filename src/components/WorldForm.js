@@ -1,28 +1,17 @@
 import React, { useState, useRef } from "react";
-import cn from "classnames";
 import { createWorld } from "../redux/worlds";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams  } from "react-router-dom";
+import {  useParams, useNavigate  } from "react-router-dom";
+import axios from "axios";
 
 const WorldForm = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const [worldDescription, setWorldDescription] = useState("");
     const [worldName, setWorldName] = useState("");
     const [worldImage, setWorldImage] = useState("");
-  
-    //const outerHeight = useRef(INITIAL_HEIGHT);
-    const textRef = useRef(null);
-    const containerRef = useRef(null);
-
-    //let { worldId } = useParams();
-  
-    // const onExpand = () => {
-	// 	if (!isExpanded) {
-    //         outerHeight.current = containerRef.current.scrollHeight;
-    //         setIsExpanded(true);
-    //     }
-	// }
 
     const onChange = (event) => {
         switch (event.target.name){
@@ -40,13 +29,19 @@ const WorldForm = () => {
         }
     }
 
-    const onClose = () => {
-        setWorldName("");
-        setWorldDescription("");
-        //setIsExpanded(false);
-    };
+    // const onSubmit = (event) => {
+    //     event.preventDefault();
+    //     const world = {
+    //         name: worldName,
+    //         description: worldDescription,
+    //         //imageUrl: worldImage,
+    //         UserId: 1,                 
+    //     }
+    //     dispatch(createWorld(world));
+    //     navigate('/worlds');
+    // }
 
-    const onSubmit = (event) => {
+    async function onSubmit(event){
         event.preventDefault();
         const world = {
             name: worldName,
@@ -54,8 +49,9 @@ const WorldForm = () => {
             //imageUrl: worldImage,
             UserId: 1,                 
         }
-        dispatch(createWorld(world));
-        onClose();
+        await dispatch(createWorld(world));
+        const {data} = await axios.get(`http://localhost:1337/worlds/name/${worldName}`);
+        navigate(`/worlds/${data.id}`);
     }
 
     return (

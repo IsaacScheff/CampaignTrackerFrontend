@@ -62,8 +62,7 @@ export function SingleWorld () {
     if(!updateForm){
         return(
             <div>
-                world {worldId}
-                <p>Name: {world.name}</p>
+                <p className='campaign-title'>{world.name}</p>
                 <img src={world.imageUrl}/>
                 <p>Description: {world.description}</p>
                 {/* See posts button? */}

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchComments, deleteComment } from "../redux/comments";
 import {  useParams  } from "react-router-dom";
-//import UpdateWorld from "./UpdateWorld";
+
 
 
 export function Comments () {
