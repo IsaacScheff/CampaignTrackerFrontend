@@ -28,7 +28,6 @@ export const _updatePost = (post) => ({
 
 export const createPost = (post) => async(dispatch) => {
   try {
-    console.log(post);
     const {data: created} = await Axios.post('http://localhost:1337/posts', post);
     dispatch(_createPost(created));
   } catch (error) {

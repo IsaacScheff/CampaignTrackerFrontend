@@ -3,7 +3,7 @@ import { createPost } from "../redux/posts";
 import { useDispatch } from "react-redux";
 import {  useParams  } from "react-router-dom";
 
-const PostForm = () => {
+const PostForm = ({formSubmit}) => {
 
     const dispatch = useDispatch();
     const [postContent, setPostContent] = useState("");
@@ -51,6 +51,7 @@ const PostForm = () => {
         }
         dispatch(createPost(post));
         onClose();
+        formSubmit(false);
     }
 
     return (
@@ -70,7 +71,7 @@ const PostForm = () => {
             </p>
             <p>
                 <label htmlFor="imageUrl">ImageUrl</label>
-                <input name="imageUrl" onChange={onChange} value={postImage}/>
+                <input name="imageUrl" onChange={onChange} value={postImage} placeholder='optional'/>
             </p>
             <div>
                 <button type="submit" disabled={postTitle.length < 1 || postContent.length < 1 || postType.length < 1}>

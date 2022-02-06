@@ -59,18 +59,22 @@ export function SingleWorld () {
         setUpdateForm(false);
     }
 
+    const onCancel = () => {
+        console.log('cacanle');
+        setUpdateForm(false);
+    }
+
     if(!updateForm){
         return(
             <div>
                 <p className='campaign-title'>{world.name}</p>
                 <img src={world.imageUrl}/>
                 <p>Description: {world.description}</p>
-                {/* See posts button? */}
-                <Posts />
                 <button className='edit'
                     onClick={() => setUpdateForm(true)}>
-                        Edit
+                        Edit Campaign
                 </button>
+                <Posts />
             </div>
             )
         }else{
@@ -93,6 +97,9 @@ export function SingleWorld () {
                         <div>
                             <button type="submit">
                                 Update
+                            </button>
+                            <button type="reset" onClick={onCancel}>
+                                Cancel
                             </button>
                         </div>
                     </form>

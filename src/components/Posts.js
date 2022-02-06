@@ -12,34 +12,46 @@ export function Posts () {
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts);
 
+    const [newPost, setNewPost] = useState(false);
+
     let { worldId } = useParams();
 
     useEffect(()=>{
         dispatch(fetchPosts(worldId))
     }, [])
+
+    const onClick = () => {
+        setNewPost(!newPost);
+    };
     
-    if(posts){
+    if(!newPost){
     return (
         <div id='posts' className='column'>
         {
             posts.map(post => (
              <div className='post' key={post.id}>
+                <h3>{post.title}</h3>
+                <p>{post.content}</p>
                 <Link to={`/${worldId}/posts/${post.id}`}>
-                    <h3>{post.title}</h3>
-                    <p>{post.content}</p>
+                    discussion
                 </Link>
                 <p>{post.type}</p>
                 <hr />
             </div>
             ))
-        }
-            <PostForm />
+        }   
+            <button type="show-post-form" onClick={onClick}>
+                Create New Post!
+            </button>
         </div>
     )
     }else{
         return(
             <div>
-                posts here
+                <PostForm formSubmit={setNewPost}/>
+                <button type="reset" onClick={onClick}>
+                Cancel
+                </button>
             </div>
         )
     }
