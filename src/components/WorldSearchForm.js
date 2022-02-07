@@ -27,7 +27,7 @@ const WorldSearchForm = () => {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="world-search-form">
           <label htmlFor="campaign-search">Search</label>
           <input 
             name="name" 

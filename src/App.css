@@ -178,6 +178,7 @@ comment-field {
 .world-list-header {
   font-family: fantasy;
   font-size: xx-large;
+  margin-right: 1%;
 }
 
 .campaign-image {
@@ -201,10 +202,25 @@ comment-field {
   margin-bottom: 5px;
 }
 
-/* .post-container {
-  margin-left: 7%;
-  display: flex;
-  flex-wrap: wrap;
-} */
+.new-world-form {
+  margin-top: 4%;
+}
+
+.about-page {
+  margin-top: 3%;
+}
+
+.world-search-form {
+  margin-bottom: 1%;
+  margin-right: 2%;
+}
+
+.single-world {
+  margin-top: 5%;
+}
+
+.single-post {
+  margin-top: 3%;
+}
 
 

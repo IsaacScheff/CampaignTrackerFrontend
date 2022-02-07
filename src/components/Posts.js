@@ -5,7 +5,6 @@ import {  useParams  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PostForm from "./PostForm";
 import PostCategoryPicker from "./PostCategoryPicker";
-//import UpdateWorld from "./UpdateWorld";
 
 
 export function Posts () {

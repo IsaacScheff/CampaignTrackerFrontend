@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPost } from "../redux/posts";
 import { useDispatch } from "react-redux";
 import {  useParams  } from "react-router-dom";
+import { fetchPostTypes } from "../redux/postTypes";
 
 const PostForm = ({formSubmit}) => {
 
@@ -12,6 +13,10 @@ const PostForm = ({formSubmit}) => {
     const [postImage, setPostImage] = useState("");
 
     let { worldId } = useParams();
+
+    useEffect(()=>{
+        dispatch(fetchPostTypes(worldId))
+    }, [dispatch, worldId])
 
     const onChange = (event) => {
         switch (event.target.name){
@@ -49,6 +54,7 @@ const PostForm = ({formSubmit}) => {
             UserId: 1,              
             WorldId: worldId,
         }
+        //dispatch(fetchPostTypes(worldId));
         dispatch(createPost(post));
         onClose();
         formSubmit(false);

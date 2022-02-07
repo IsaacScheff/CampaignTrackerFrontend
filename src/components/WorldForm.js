@@ -45,6 +45,7 @@ const WorldForm = () => {
     return (
         <form
             onSubmit={onSubmit}
+            className="new-world-form"
         >
 
             <label htmlFor="name">Name</label>

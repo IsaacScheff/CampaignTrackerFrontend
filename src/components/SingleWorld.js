@@ -4,9 +4,8 @@ import { fetchSingleWorld, updateWorld } from "../redux/singleWorld";
 import { deleteWorld } from "../redux/worlds";
 import {  useParams  } from "react-router-dom";
 import Posts from "./Posts";
-import { fetchPosts } from "../redux/posts";
 import { Link } from "react-router-dom";
-//import UpdateWorld from "./UpdateWorld";
+
 
 
 export function SingleWorld () {
@@ -46,7 +45,7 @@ export function SingleWorld () {
         event.preventDefault();
         const world = {
             id: worldId,
-            UserId: 1       //needs to be changed to grab actual user ID
+            UserId: 1       
         }
         if(worldName)
             world.name = worldName;
@@ -60,13 +59,12 @@ export function SingleWorld () {
     }
 
     const onCancel = () => {
-        console.log('cacanle');
         setUpdateForm(false);
     }
 
     if(!updateForm){
         return(
-            <div>
+            <div className="single-world">
                 <p className='campaign-title'>{world.name}</p>
                 <img className="campaign-image" src={world.imageUrl}/>
                 <p>Description: {world.description}</p>
@@ -79,7 +77,7 @@ export function SingleWorld () {
             )
         }else{
             return (
-                <div>
+                <div className="single-world">
                     <form
                         onSubmit={onSubmit}
                     >

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import cn from "classnames";
 import { createComment } from "../redux/comments";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {  useParams  } from "react-router-dom";
 import heightField from "../heightField";
 

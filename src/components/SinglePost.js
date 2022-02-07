@@ -53,18 +53,21 @@ export function SinglePost () {
             type: postType,
             title: postTitle,
             imageUrl: postImage,
-            UserId: 1,                 //needs to be changed to grab actual user ID
+            UserId: 1,                 
             WorldId: worldId,
             id: postId
         }
-        console.log(post);
         dispatch(updatePost(post));
+        setUpdateForm(false);
+    }
+
+    const onCancel = () => {
         setUpdateForm(false);
     }
     
     if(!updateForm){
         return(
-            <div>
+            <div className="single-post">
                 <button className='edit'
                     onClick={() => setUpdateForm(true)}>
                         Edit
@@ -79,7 +82,7 @@ export function SinglePost () {
             )
         }else{
             return (
-                <div>
+                <div className="single-post">
                     <form
                         onSubmit={onSubmit}
                     >
@@ -101,6 +104,9 @@ export function SinglePost () {
                         <div>
                             <button type="submit">
                                 Update
+                            </button>
+                            <button type="reset" onClick={onCancel}>
+                                Cancel
                             </button>
                         </div>
                 
