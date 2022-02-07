@@ -6,19 +6,14 @@ import SingleWorld from './SingleWorld';
 import SinglePost from './SinglePost';
 import AboutPage from "./AboutPage";
 import WorldForm from "./WorldForm";
+import Navbar from "./Navbar";
 import "../App.css";
 
 const Router = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <div className="App">
-        <nav className="navbar">
-          <Link to ='/worlds'>Campaign List</Link>
-          ~~~
-          <Link to ='/createnewcampaign'>Create New Campaign</Link>
-          ~~~
-          <Link to ='/about'>About</Link>
-        </nav>
         <main>
           {/* <WorldList />  */}
         </main>

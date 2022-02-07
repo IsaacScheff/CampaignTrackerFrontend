@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import logo from './logo.svg';
+import Navbar from "./Navbar";
 import './App.css';
 
 import store from './store'

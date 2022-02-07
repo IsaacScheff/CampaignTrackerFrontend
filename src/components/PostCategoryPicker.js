@@ -48,7 +48,7 @@ const PostCategoryPicker = () => {
                     </button>
                 </div>
             )
-        }else {
+        }else{
             return (
                 <div>
                     <select name="postTypeList" value={typeSelection} onChange={onChange}>
