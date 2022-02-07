@@ -5,6 +5,7 @@ import postsReducer from './posts';
 import commentsReducer from './comments';
 import singlePostReducer from './singlePost';
 import postTypesReducer from './postTypes';
+import { worldErrorReducer } from './worlds';
 import auth from './auth';
 
 const appReducer = combineReducers({
@@ -14,6 +15,7 @@ const appReducer = combineReducers({
     comments: commentsReducer,
     post: singlePostReducer,
     types: postTypesReducer,
+    worldError: worldErrorReducer,
     auth
 });
 

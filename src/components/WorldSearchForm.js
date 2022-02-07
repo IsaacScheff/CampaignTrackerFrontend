@@ -1,17 +1,19 @@
-import React, { useState, useRef } from "react";
-import { createWorld } from "../redux/worlds";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import {  useNavigate  } from "react-router-dom";
 import axios from "axios";
+import SearchErrorMessage from "./SearchErrorMessage";
+
 
 const WorldSearchForm = () => {
 
     const navigate = useNavigate();
 
     const [searchTerm, setSearchTerm] = useState("");
+    const [searchError, setSearchError] = useState(false);
 
     const onChange = (event) => {
         setSearchTerm(event.target.value);
+        setSearchError(false);
     }
 
     async function onSubmit (event){
@@ -20,9 +22,7 @@ const WorldSearchForm = () => {
         if(data){
             navigate(`/worlds/${data.id}`);
         }else{
-            console.log("world not found");
-            console.log(data);
-            //mesage to user/other actions here
+            setSearchError(true);
         }
     }
 
@@ -34,7 +34,10 @@ const WorldSearchForm = () => {
             onChange={onChange} 
             value={searchTerm}
             placeholder="Campaign title"
-        />
+            />
+            <div className="world-search-failed">
+                {searchError ? <SearchErrorMessage /> : null}
+            </div>
         </form>
     );
   };

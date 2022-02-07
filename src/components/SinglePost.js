@@ -70,7 +70,7 @@ export function SinglePost () {
             <div className="single-post">
                 <button className='edit'
                     onClick={() => setUpdateForm(true)}>
-                        Edit
+                        Edit Post
                 </button>
                 <h3>{post.title}</h3>
                 <p>{post.content}</p>

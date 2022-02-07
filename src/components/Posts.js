@@ -32,14 +32,14 @@ export function Posts () {
         {
             posts.map(post => (
              <div className='post' key={post.id}>
-                <h3>{post.title}</h3>
+                <h3 className='post-title'>{post.title}</h3>
+                <p className='post-type'>{post.type}</p>
                 <p>{post.content}</p>
                 <p>
                     <Link to={`/${worldId}/posts/${post.id}`}>
                         Discuss post
                     </Link>
                 </p>
-                <p>{post.type}</p>
             </div>
             ))
         }   

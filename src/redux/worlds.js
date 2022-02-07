@@ -3,6 +3,8 @@ import Axios from "axios";
 const SET_WORLDS = 'SET_WORLDS';
 const CREATE_WORLD = 'CREATE_WORLD';
 const DELETE_WORLD = 'DELETE_WORLD';
+const CREATE_WORLD_ERROR = 'CREATE_WORLD_ERROR';
+const CLEAR_WORLD_ERROR = 'CLEAR_WORLD_ERROR';
 
 
 export const _createWorld = (world) => ({
@@ -20,10 +22,26 @@ export const _deleteWorld = (world) => ({
   world
 });
 
+export const setWorldError = (error) => ({
+  type: CREATE_WORLD_ERROR,
+  error
+});
+
+export const _clearWorldError = () => ({
+  type: CLEAR_WORLD_ERROR
+});
+
+export const clearWorldError = () => dispatch => {
+  dispatch(_clearWorldError());
+}
+
 export const createWorld = (world) => async(dispatch) => {
   try {
     const {data: created} = await Axios.post('http://localhost:1337/worlds', world);
-    dispatch(_createWorld(created));
+    if(created.errors)
+      dispatch(setWorldError(created.errors[0].message));
+    else
+      dispatch(_createWorld(created));
   } catch (error) {
     console.log(error);
   }
@@ -61,4 +79,17 @@ export default function worldsReducer(state = initialState, action) {
     default:
       return state;
   };
+
+}
+
+const intialErrorState = "";
+export function worldErrorReducer(state = intialErrorState, action){
+  switch(action.type){
+    case CREATE_WORLD_ERROR:
+      return action.error;
+    case CLEAR_WORLD_ERROR:
+      return intialErrorState;
+    default:
+      return state;
+  }
 }

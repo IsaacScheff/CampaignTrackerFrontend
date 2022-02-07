@@ -21,9 +21,9 @@ export function Comments () {
         {
             posts.map(comment => (
              <div className='comment' key={comment.id}>
-                  <button className='remove'
+                 <div className='comment-text'>{comment.content}</div>
+                  <button className='comment-delete'
                     onClick={() => dispatch(deleteComment(comment.id))}>X</button>
-                <p>{comment.content}</p>
             </div>
             ))
         }

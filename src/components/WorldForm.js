@@ -1,17 +1,25 @@
-import React, { useState, useRef } from "react";
-import { createWorld } from "../redux/worlds";
+import React, { useEffect, useState } from "react";
+import { createWorld, clearWorldError } from "../redux/worlds";
 import { useDispatch, useSelector } from "react-redux";
-import {  useParams, useNavigate  } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const WorldForm = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const worldError = useSelector((state) => state.worldError);
 
     const [worldDescription, setWorldDescription] = useState("");
     const [worldName, setWorldName] = useState("");
     const [worldImage, setWorldImage] = useState("");
+    const [createAttempt, setCreateAttempt] = useState(false);
+
+    useEffect(()=>{
+        if(!worldError && createAttempt){
+            redirect();
+        }
+    }, [createAttempt, worldError]);
 
     const onChange = (event) => {
         switch (event.target.name){
@@ -34,38 +42,62 @@ const WorldForm = () => {
         const world = {
             name: worldName,
             description: worldDescription,
-            //imageUrl: worldImage,
             UserId: 1,                 
         }
+        if(worldImage)
+            world.imageUrl = worldImage
+          
         await dispatch(createWorld(world));
+        setCreateAttempt(true);
+    }
+
+    async function redirect(){
         const {data} = await axios.get(`http://localhost:1337/worlds/name/${worldName}`);
         navigate(`/worlds/${data.id}`);
     }
 
-    return (
-        <form
-            onSubmit={onSubmit}
-            className="new-world-form"
-        >
+    const clearError = () => {
+        setCreateAttempt(false);
+        dispatch(clearWorldError());
+    }
 
-            <label htmlFor="name">Name</label>
-            <input name="name" onChange={onChange} value={worldName}/>
-            <p>
-                <label htmlFor="description">Description</label>
-                <input name="description" onChange={onChange} value={worldDescription}/>
-            </p>
-            <p>
-                <label htmlFor="imageUrl">ImageUrl</label>
-                <input name="imageUrl" onChange={onChange} placeholder="optional"/>
-            </p>
+    if(!worldError){
+        return (
             <div>
-                <button type="submit" disabled={worldName.length < 1}>
-                    Create!
-                </button>
+                <form
+                    onSubmit={onSubmit}
+                    className="new-world-form"
+                >
+
+                    <label htmlFor="name">Name</label>
+                    <input name="name" onChange={onChange} value={worldName}/>
+                    <p>
+                        <label htmlFor="description">Description</label>
+                        <input name="description" onChange={onChange} value={worldDescription}/>
+                    </p>
+                    <p>
+                        <label htmlFor="imageUrl">ImageUrl</label>
+                        <input name="imageUrl" onChange={onChange} placeholder="optional"/>
+                    </p>
+                    <div>
+                        <button type="submit" disabled={worldName.length < 1}>
+                            Create!
+                        </button>
+                    </div>
+
+                </form>
             </div>
-	
-	    </form>
-    );
+        );
+        }else{
+            return (
+                <div className="create-world-error">
+                    <p>{worldError}</p>
+                    <button onClick={clearError}>
+                        Ok!
+                    </button>
+                </div>
+            );
+    }
   };
   
   export default WorldForm;
