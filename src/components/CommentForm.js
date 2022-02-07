@@ -3,7 +3,7 @@ import cn from "classnames";
 import { createComment } from "../redux/comments";
 import { useDispatch } from "react-redux";
 import {  useParams  } from "react-router-dom";
-import heightField from "../heightField";
+import heightField from "./heightField";
 
 const INITIAL_HEIGHT = 46;
 
@@ -44,7 +44,6 @@ const CommentForm = () => {
             UserId: 1,               
             PostId: postId
         }
-        console.log(comment);
         dispatch(createComment(comment));
         onClose();
     }

@@ -4,9 +4,9 @@ export function HomePage () {
     
     return (
         <div className='home-page'>
-            <h className='campaign-title'>
+            <h1 className='campaign-title'>
                 Welcome to Campaign Tracker! 
-            </h>
+            </h1>
             <div className='home-page-text'>
                 <ul>
                     <li>Campaign Tracker is a structured forum for group note taking for Tabletop Role-Playing games</li> 
