@@ -23,6 +23,7 @@ export function Posts () {
     const onClick = () => {
         setNewPost(!newPost);
     };
+
     
     if(!newPost){
     return (
@@ -31,13 +32,14 @@ export function Posts () {
             <div className='post-container'>
         {
             posts.map(post => (
+                
              <div className='post' key={post.id}>
                 <h3 className='post-title'>{post.title}</h3>
                 <p className='post-type'>{post.type}</p>
                 <p>{post.content}</p>
                 <p>
                     <Link to={`/${worldId}/posts/${post.id}`}>
-                        Discuss post
+                        Comments: {post.Comments.length}
                     </Link>
                 </p>
             </div>
