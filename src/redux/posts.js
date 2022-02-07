@@ -32,8 +32,9 @@ export const _updatePost = (post) => ({
 });
 
 export const fetchPostsByType = (worldId, type) => async (dispatch) => {
+  console.log(worldId, type);
   try {
-    const {data} = await Axios.get(`http://localhost:1337/posts/types/${worldId}/${type}`);
+    const {data} = await Axios.get(`http://localhost:1337/posts/bytype/${worldId}/${type}`);
     dispatch(setPostsByType(data));
   } catch (error) {
     console.log(error);
