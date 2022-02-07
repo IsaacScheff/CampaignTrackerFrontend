@@ -12,7 +12,6 @@ import "../App.css";
 const Router = () => {
   return (
     <BrowserRouter>
-      {/* <Navbar /> */}
       <div className="App">
         <main>
           <Navbar />

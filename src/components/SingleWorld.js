@@ -33,9 +33,9 @@ export function SingleWorld () {
             case 'description':
                 setWorldDescription(event.target.value);
                 break;
-            // case 'imageUrl':
-            //     setWorldImage(event.target.value);
-            //     break;  
+            case 'imageUrl':
+                setWorldImage(event.target.value);
+                break;  
             default:
                 console.log("onChange non selected value");
         }

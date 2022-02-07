@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchComments, deleteComment } from "../redux/comments";
 import {  useParams  } from "react-router-dom";
 
-
-
 export function Comments () {
     
     const dispatch = useDispatch();

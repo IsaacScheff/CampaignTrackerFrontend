@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { fetchWorlds } from "../redux/worlds";
 import { Link } from "react-router-dom";
-import WorldForm from "./WorldForm";
 import WorldSearchForm from "./WorldSearchForm";
 
 

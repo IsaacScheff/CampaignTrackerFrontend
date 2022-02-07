@@ -54,7 +54,6 @@ const PostForm = ({formSubmit}) => {
             UserId: 1,              
             WorldId: worldId,
         }
-        //dispatch(fetchPostTypes(worldId));
         dispatch(createPost(post));
         onClose();
         formSubmit(false);
