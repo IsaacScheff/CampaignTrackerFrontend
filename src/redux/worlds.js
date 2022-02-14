@@ -37,7 +37,8 @@ export const clearWorldError = () => dispatch => {
 
 export const createWorld = (world) => async(dispatch) => {
   try {
-    const {data: created} = await Axios.post('http://localhost:1337/worlds', world);
+    // const {data: created} = await Axios.post('http://localhost:1337/worlds', world);
+    const {data: created} = await Axios.post('https://rpgcampaigntracker.herokuapp.com/worlds', world);
     if(created.errors)
       dispatch(setWorldError(created.errors[0].message));
     else
@@ -49,7 +50,8 @@ export const createWorld = (world) => async(dispatch) => {
 
 export const fetchWorlds = () => async (dispatch) => {
   try{
-    const {data} = await Axios.get('http://localhost:1337/worlds');
+    //const {data} = await Axios.get('http://localhost:1337/worlds');
+    const {data} = await Axios.get('https://rpgcampaigntracker.herokuapp.com/worlds');
     dispatch(setWorlds(data));
   }catch(error){
     console.log(error);
