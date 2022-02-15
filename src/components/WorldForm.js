@@ -52,8 +52,9 @@ const WorldForm = () => {
     }
 
     async function redirect(){
-        const {data} = await axios.get(`http://localhost:1337/worlds/name/${worldName}`);
-        navigate(`/worlds/${data.id}`);
+        // const {data} = await axios.get(`http://localhost:1337/worlds/name/${worldName}`);
+        // navigate(`/worlds/${data.id}`);
+        console.log('redirect method ran');
     }
 
     const clearError = () => {
