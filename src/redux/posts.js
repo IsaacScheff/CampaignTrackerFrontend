@@ -51,7 +51,8 @@ export const createPost = (post) => async(dispatch) => {
 
 export const fetchPosts = (worldid) => async (dispatch) => {
   try{
-    const {data} = await Axios.get(`http://localhost:1337/posts/${worldid}`);
+    // const {data} = await Axios.get(`http://localhost:1337/posts/${worldid}`);
+    const {data} = await Axios.get(`http://api.campaigntracker.org/posts/${worldid}`);
     dispatch(setPosts(data));
   }catch(error){
     console.log(error); 
