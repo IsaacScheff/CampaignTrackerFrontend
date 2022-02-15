@@ -42,9 +42,7 @@ export const createWorld = (world) => async(dispatch) => {
       'http://api.campaigntracker.org/worlds', 
       world, 
       {
-        headers: {
           mode: 'cors'
-        }
       });
     if(created.errors)
       dispatch(setWorldError(created.errors[0].message));
