@@ -42,8 +42,7 @@ const WorldForm = () => {
         const world = {
             name: worldName,
             description: worldDescription,
-            UserId: 1,
-            mode: 'cors'                 
+            UserId: 1                
         }
         if(worldImage)
             world.imageUrl = worldImage
