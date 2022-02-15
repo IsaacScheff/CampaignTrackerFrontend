@@ -38,7 +38,14 @@ export const clearWorldError = () => dispatch => {
 export const createWorld = (world) => async(dispatch) => {
   try {
     // const {data: created} = await Axios.post('http://localhost:1337/worlds', world);
-    const {data: created} = await Axios.post('http://api.campaigntracker.org/worlds', world);
+    const {data: created} = await Axios.post(
+      'http://api.campaigntracker.org/worlds', 
+      world, 
+      {
+        headers: {
+          mode: 'cors'
+        }
+      });
     if(created.errors)
       dispatch(setWorldError(created.errors[0].message));
     else
