@@ -1,5 +1,8 @@
 import Axios from "axios";
 
+//const api = 'http://localhost:1337'
+const api = 'http://api.campaigntracker.org'
+
 const SET_WORLDS = 'SET_WORLDS';
 const CREATE_WORLD = 'CREATE_WORLD';
 const DELETE_WORLD = 'DELETE_WORLD';
@@ -37,8 +40,7 @@ export const clearWorldError = () => dispatch => {
 
 export const createWorld = (world) => async(dispatch) => {
   try {
-    // const {data: created} = await Axios.post('http://localhost:1337/worlds', world);
-    const {data: created} = await Axios.post('http://api.campaigntracker.org/worlds', world);
+    const {data: created} = await Axios.post(`${api}/worlds`, world);
     if(created.errors)
       dispatch(setWorldError(created.errors[0].message));
     else
@@ -50,8 +52,7 @@ export const createWorld = (world) => async(dispatch) => {
 
 export const fetchWorlds = () => async (dispatch) => {
   try{
-    //const {data} = await Axios.get('http://localhost:1337/worlds');
-    const {data} = await Axios.get('http://api.campaigntracker.org/worlds');
+    const {data} = await Axios.get(`${api}/worlds`);
     dispatch(setWorlds(data));
   }catch(error){
     console.log(error);
@@ -60,7 +61,7 @@ export const fetchWorlds = () => async (dispatch) => {
 
 export const deleteWorld = (worldId) => async (dispatch) => {
   try {
-    const {data: world} = await Axios.delete(`http://localhost:1337/worlds/${worldId}`);
+    const {data: world} = await Axios.delete(`${api}/worlds/${worldId}`);
     dispatch(_deleteWorld(world));
   } catch (error) {
     console.log(error);

@@ -1,5 +1,7 @@
 import Axios from "axios";
 
+//const api = 'http://localhost:1337'
+const api = 'http://api.campaigntracker.org'
 
 const SET_POST_TYPES = 'SET_POST_TYPES';
 
@@ -11,7 +13,7 @@ export const setPostTypes = (types) => ({
 export const fetchPostTypes = (worldId) => {
   return async (dispatch) => {
     try {
-      const {data} = await Axios.get(`http://localhost:1337/posts/types/${worldId}`);
+      const {data} = await Axios.get(`${api}/posts/types/${worldId}`);
       dispatch(setPostTypes(data));
     } catch (error) {
         console.log(error);

@@ -1,5 +1,8 @@
 import Axios from "axios";
 
+//const api = 'http://localhost:1337'
+const api = 'http://api.campaigntracker.org'
+
 const SET_POSTS = 'SET_POSTS';
 const SET_POSTS_BY_TYPE= 'SET_POSTS_BY_TYPE';
 const CREATE_POST = 'CREATE_POST';
@@ -33,7 +36,7 @@ export const _updatePost = (post) => ({
 
 export const fetchPostsByType = (worldId, type) => async (dispatch) => {
   try {
-    const {data} = await Axios.get(`http://localhost:1337/posts/bytype/${worldId}/${type}`);
+    const {data} = await Axios.get(`${api}/posts/bytype/${worldId}/${type}`);
     dispatch(setPostsByType(data));
   } catch (error) {
     console.log(error);
@@ -42,7 +45,7 @@ export const fetchPostsByType = (worldId, type) => async (dispatch) => {
 
 export const createPost = (post) => async(dispatch) => {
   try {
-    const {data: created} = await Axios.post('http://localhost:1337/posts', post);
+    const {data: created} = await Axios.post(`${api}/posts`, post);
     dispatch(_createPost(created));
   } catch (error) {
     console.log(error);
@@ -51,8 +54,7 @@ export const createPost = (post) => async(dispatch) => {
 
 export const fetchPosts = (worldid) => async (dispatch) => {
   try{
-    // const {data} = await Axios.get(`http://localhost:1337/posts/${worldid}`);
-    const {data} = await Axios.get(`http://api.campaigntracker.org/posts/${worldid}`);
+    const {data} = await Axios.get(`${api}/posts/${worldid}`);
     dispatch(setPosts(data));
   }catch(error){
     console.log(error); 
@@ -61,7 +63,7 @@ export const fetchPosts = (worldid) => async (dispatch) => {
 
 export const deletePost = (postId) => async (dispatch) => {
   try {
-    const {data: post} = await Axios.delete(`http://localhost:1337/posts/${postId}`);
+    const {data: post} = await Axios.delete(`${api}/posts/${postId}`);
     dispatch(_deletePost(post));
   } catch (error) {
     console.log(error);
@@ -70,7 +72,7 @@ export const deletePost = (postId) => async (dispatch) => {
 
 export const updatePost = (post) => async(dispatch) => {
   try {
-    const {data: updated} = await Axios.put(`http://localhost:1337/posts/${post.id}`, post);
+    const {data: updated} = await Axios.put(`${api}/${post.id}`, post);
     dispatch(_updatePost(updated));
   } catch (error) {
     console.log(error);

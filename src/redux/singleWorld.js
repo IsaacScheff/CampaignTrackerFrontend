@@ -1,5 +1,8 @@
 import Axios from 'axios';
 
+//const api = 'http://localhost:1337'
+const api = 'http://api.campaigntracker.org'
+
 const SET_SINGLE_WORLD = 'SET_SINGLE_WORLD';
 const UPDATE_WORLD = 'UPDATE_WORLD';
 
@@ -16,7 +19,7 @@ export const _updateWorld = (world) => ({
 export const fetchSingleWorld = (id) => {
     return async (dispatch) => {
         try { 
-            const {data} = await Axios.get(`http://localhost:1337/worlds/${id}`);
+            const {data} = await Axios.get(`${api}/worlds/${id}`);
             dispatch(setSingleWorld(data));
         } catch (error) {
             console.log(error);
@@ -26,7 +29,7 @@ export const fetchSingleWorld = (id) => {
 
 export const updateWorld = (world) => async(dispatch) => {
     try {
-      const {data: updated} = await Axios.put(`http://localhost:1337/worlds/${world.id}`, world);
+      const {data: updated} = await Axios.put(`${api}/worlds/${world.id}`, world);
       dispatch(_updateWorld(updated));
     } catch (error) {
       console.log(error);

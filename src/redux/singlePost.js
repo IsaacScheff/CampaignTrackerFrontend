@@ -1,5 +1,7 @@
 import Axios from "axios";
 
+//const api = 'http://localhost:1337'
+const api = 'http://api.campaigntracker.org'
 
 const SET_SINGLE_POSTS = 'SET_SINGLE_POSTS';
 const UPDATE_POST = 'UPDATE_POST';
@@ -17,7 +19,7 @@ export const _updatePost = (post) => ({
 export const fetchSinglePost = (id) => {
   return async (dispatch) => {
     try {
-      const {data} = await Axios.get(`http://localhost:1337/posts/singlepost/${id}`);
+      const {data} = await Axios.get(`${api}/posts/singlepost/${id}`);
       dispatch(setSinglePost(data));
     } catch (error) {
         console.log(error);
@@ -27,7 +29,7 @@ export const fetchSinglePost = (id) => {
 
 export const updatePost = (post) => async(dispatch) => {
   try {
-    const {data: updated} = await Axios.put(`http://localhost:1337/posts/${post.id}`, post);
+    const {data: updated} = await Axios.put(`${api}/posts/${post.id}`, post);
     dispatch(_updatePost(updated));
   } catch (error) {
     console.log(error);

@@ -1,5 +1,8 @@
 import Axios from "axios";
 
+//const api = 'http://localhost:1337'
+const api = 'http://api.campaigntracker.org'
+
 const SET_COMMENTS = 'SET_COMMENTS';
 const CREATE_COMMENT = 'CREATE_COMMENT';
 const DELETE_COMMENT = 'DELETE_COMMENT';
@@ -22,7 +25,7 @@ export const _deleteComment = (comment) => ({
 
 export const createComment = (comment) => async(dispatch) => {
   try {
-    const {data: created} = await Axios.post('http://localhost:1337/comments', comment);
+    const {data: created} = await Axios.post(`${api}/comments`, comment);
     dispatch(_createComment(created));
   } catch (error) {
     console.log(error);
@@ -31,7 +34,7 @@ export const createComment = (comment) => async(dispatch) => {
 
 export const fetchComments = (postid) => async (dispatch) => {
   try{
-    const {data} = await Axios.get(`http://localhost:1337/comments/${postid}`);
+    const {data} = await Axios.get(`${api}/comments/${postid}`);
     dispatch(setComments(data));
   }catch(error){
     console.log(error); 
@@ -40,7 +43,7 @@ export const fetchComments = (postid) => async (dispatch) => {
 
 export const deleteComment = (commentId) => async (dispatch) => {
   try {
-    const {data: comment} = await Axios.delete(`http://localhost:1337/comments/${commentId}`);
+    const {data: comment} = await Axios.delete(`${api}/comments/${commentId}`);
     dispatch(_deleteComment(comment));
   } catch (error) {
     console.log(error);

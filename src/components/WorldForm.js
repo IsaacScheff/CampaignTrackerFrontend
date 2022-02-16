@@ -50,11 +50,12 @@ const WorldForm = () => {
         await dispatch(createWorld(world));
         setCreateAttempt(true);
     }
-
+    
+    //const api = 'http://localhost:1337'
+    const api = 'http://api.campaigntracker.org'
     async function redirect(){
-        // const {data} = await axios.get(`http://localhost:1337/worlds/name/${worldName}`);
-        // navigate(`/worlds/${data.id}`);
-        console.log('redirect method ran');
+        const {data} = await axios.get(`${api}/worlds/name/${worldName}`);
+        navigate(`/worlds/${data.id}`);
     }
 
     const clearError = () => {
