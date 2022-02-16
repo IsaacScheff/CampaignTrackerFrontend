@@ -18,7 +18,9 @@ const WorldSearchForm = () => {
 
     async function onSubmit (event){
         event.preventDefault();
-        const {data} = await axios.get(`http://localhost:1337/worlds/name/${searchTerm}`);
+        //const api = 'http://localhost:1337'
+        const api = 'https://api.campaigntracker.org'
+        const {data} = await axios.get(`${api}/worlds/name/${searchTerm}`);
         if(data){
             navigate(`/worlds/${data.id}`);
         }else{
