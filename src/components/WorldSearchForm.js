@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {  useNavigate  } from "react-router-dom";
 import axios from "axios";
 import SearchErrorMessage from "./SearchErrorMessage";
+import api from "../dev";
 
 
 const WorldSearchForm = () => {
@@ -18,8 +19,6 @@ const WorldSearchForm = () => {
 
     async function onSubmit (event){
         event.preventDefault();
-        //const api = 'http://localhost:1337'
-        const api = 'https://api.campaigntracker.org'
         const {data} = await axios.get(`${api}/worlds/name/${searchTerm}`);
         if(data){
             navigate(`/worlds/${data.id}`);

@@ -3,6 +3,7 @@ import { createWorld, clearWorldError } from "../redux/worlds";
 import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate } from "react-router-dom";
 import axios from "axios";
+import api from "../dev";
 
 const WorldForm = () => {
 
@@ -51,8 +52,6 @@ const WorldForm = () => {
         setCreateAttempt(true);
     }
     
-    //const api = 'http://localhost:1337'
-    const api = 'https://api.campaigntracker.org'
     async function redirect(){
         const {data} = await axios.get(`${api}/worlds/name/${worldName}`);
         navigate(`/worlds/${data.id}`);

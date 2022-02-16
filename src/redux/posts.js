@@ -1,7 +1,5 @@
 import Axios from "axios";
-
-//const api = 'http://localhost:1337'
-const api = 'https://api.campaigntracker.org'
+import api from "../dev";
 
 const SET_POSTS = 'SET_POSTS';
 const SET_POSTS_BY_TYPE= 'SET_POSTS_BY_TYPE';
