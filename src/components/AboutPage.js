@@ -5,7 +5,7 @@ export function AboutPage () {
     
     return (
         <div className='about-page'>
-            Created with the React javascript library by Isaac Scheff
+            Created in React by Isaac Scheff
             <p>Find me on</p>
             <p>
                 <a href="https://www.linkedin.com/in/isaac-scheff/"> 

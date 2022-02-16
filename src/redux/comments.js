@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 //const api = 'http://localhost:1337'
-const api = 'http://api.campaigntracker.org'
+const api = 'https://api.campaigntracker.org'
 
 const SET_COMMENTS = 'SET_COMMENTS';
 const CREATE_COMMENT = 'CREATE_COMMENT';

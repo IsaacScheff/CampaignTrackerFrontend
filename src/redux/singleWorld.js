@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 //const api = 'http://localhost:1337'
-const api = 'http://api.campaigntracker.org'
+const api = 'https://api.campaigntracker.org'
 
 const SET_SINGLE_WORLD = 'SET_SINGLE_WORLD';
 const UPDATE_WORLD = 'UPDATE_WORLD';
