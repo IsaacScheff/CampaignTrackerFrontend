@@ -39,7 +39,7 @@ export function Posts () {
                 <p>{post.content}</p>
                 <p>
                     <Link to={`/${worldId}/posts/${post.id}`}>
-                        {/* Comments: {post.Comments.length} */}
+                        Comments: {post.Comments.length}
                     </Link>
                 </p>
             </div>

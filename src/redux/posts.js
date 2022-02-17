@@ -44,6 +44,9 @@ export const fetchPostsByType = (worldId, type) => async (dispatch) => {
 export const createPost = (post) => async(dispatch) => {
   try {
     const {data: created} = await Axios.post(`${api}/posts`, post);
+    created.Comments = [];
+    //creating the comment array prevetns bug on viewing all post page
+    //all other instances of posts are eager loaded with their comments
     dispatch(_createPost(created));
   } catch (error) {
     console.log(error);

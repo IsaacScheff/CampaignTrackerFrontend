@@ -15,7 +15,7 @@ const PostForm = ({formSubmit}) => {
     let { worldId } = useParams();
 
     useEffect(()=>{
-        dispatch(fetchPostTypes(worldId))
+        dispatch(fetchPostTypes(worldId));
     }, [dispatch, worldId])
 
     const onChange = (event) => {
@@ -48,13 +48,14 @@ const PostForm = ({formSubmit}) => {
         event.preventDefault();
         const post = {
             content: postContent,
-            type: postType,
+            type: postType.replaceAll(' ', '_'),
             title: postTitle,
             imageUrl: postImage,
             UserId: 1,              
             WorldId: worldId,
         }
         dispatch(createPost(post));
+        dispatch(fetchPostTypes(worldId));
         onClose();
         formSubmit(false);
     }
