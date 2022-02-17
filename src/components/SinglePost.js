@@ -19,6 +19,7 @@ export function SinglePost () {
     const [postType, setPostType] = useState(post.type);
     const [postTitle, setPostTitle] = useState(post.title);
     const [postImage, setPostImage] = useState(post.imageUrl);
+    //const [editedContent, setEditedContent] = useState("");
 
     let { postId } = useParams();
     let { worldId } = useParams();
@@ -64,12 +65,22 @@ export function SinglePost () {
     const onCancel = () => {
         setUpdateForm(false);
     }
+
+    const onClick = () => {
+        setPostContent(post.content);
+        setUpdateForm(true);
+    }
+
+    const contentSizer = (element) => {
+        element.target.style.height = "1px";
+        element.target.style.height = (25 + element.target.scrollHeight) + "px";
+    }
     
     if(!updateForm){
         return(
             <div className="single-post">
-                <button className='edit'
-                    onClick={() => setUpdateForm(true)}>
+                 <button className='edit'
+                    onClick={onClick}>
                         Edit Post
                 </button>
                 <h3>{post.title}</h3>
@@ -88,18 +99,18 @@ export function SinglePost () {
                     >
 
                         <label htmlFor="title">Title</label>
-                        <input name="title" onChange={onChange} />
+                        <input name="title" onChange={onChange} placeholder={post.title}/>
                         <p>
                             <label htmlFor="content">Content</label>
-                            <input name="content" onChange={onChange} />
+                            <textarea name="content" onClick={contentSizer} onChange={onChange} value={postContent}/>
                         </p>
                         <p>
                             <label htmlFor="type">Category</label>
-                            <input name="type" onChange={onChange} />
+                            <input name="type" onChange={onChange} placeholder={post.type}/>
                         </p>
                         <p>
                             <label htmlFor="imageUrl">ImageUrl</label>
-                            <input name="imageUrl" onChange={onChange} />
+                            <input name="imageUrl" onChange={onChange} placeholder="optional"/>
                         </p>
                         <div>
                             <button type="submit">

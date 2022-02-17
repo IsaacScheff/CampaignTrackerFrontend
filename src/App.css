@@ -265,3 +265,8 @@ li{
   height: 4%;
   width: 20%;
 }
+
+.input-content{
+  height: 100px !important;
+  width: 400px;
+  }
