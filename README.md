@@ -1,4 +1,4 @@
-You can find the deployed version at main.campaigntracker.org
+You can find the deployed version at https://main.campaigntracker.org
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 ### `npm start`
