@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "../redux/posts";
 import { fetchSinglePost, updatePost } from "../redux/singlePost";
-import {  useParams  } from "react-router-dom";
+import {  useParams, useNavigate  } from "react-router-dom";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
-import { Link } from "react-router-dom";
-
 
 
 export function SinglePost () {
 
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const post = useSelector((state) => state.post);
 
@@ -19,7 +18,7 @@ export function SinglePost () {
     const [postType, setPostType] = useState(post.type);
     const [postTitle, setPostTitle] = useState(post.title);
     const [postImage, setPostImage] = useState(post.imageUrl);
-    //const [editedContent, setEditedContent] = useState("");
+  
 
     let { postId } = useParams();
     let { worldId } = useParams();
@@ -73,7 +72,17 @@ export function SinglePost () {
 
     const contentSizer = (element) => {
         element.target.style.height = "1px";
+        element.target.style.width = "50%";
         element.target.style.height = (25 + element.target.scrollHeight) + "px";
+    }
+
+    const onDelConfirm = () => {
+        dispatch(deletePost(post.id));
+        navigate(`/worlds/${worldId}`);
+    }
+
+    const onDelCancel = () => {
+        setUpdateForm(false);
     }
     
     if(!updateForm){
@@ -102,7 +111,7 @@ export function SinglePost () {
                         <input name="title" onChange={onChange} placeholder={post.title}/>
                         <p>
                             <label htmlFor="content">Content</label>
-                            <textarea name="content" onClick={contentSizer} onChange={onChange} value={postContent}/>
+                            <textarea name="content" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={postContent}/>
                         </p>
                         <p>
                             <label htmlFor="type">Category</label>
@@ -122,12 +131,10 @@ export function SinglePost () {
                         </div>
                 
                     </form>
-                    <Link to ={`/worlds/${worldId}`}>
-                        <button className='remove'
-                            onClick={() => dispatch(deletePost(post.id))}>
-                                Delete Post
-                        </button>
-                    </Link>
+                    <button className='remove'
+                        onClick={() => window.confirm('Are you sure you wish to Delete this post? This action is permanent.') ? onDelConfirm() : onDelCancel()}>
+                            Delete Post
+                    </button>
                 </div>
             )
         }

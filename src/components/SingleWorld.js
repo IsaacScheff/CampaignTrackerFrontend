@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleWorld, updateWorld } from "../redux/singleWorld";
 import { deleteWorld } from "../redux/worlds";
-import {  useParams  } from "react-router-dom";
+import {  useParams, useNavigate  } from "react-router-dom";
 import Posts from "./Posts";
-import { Link } from "react-router-dom";
+
 
 
 
 export function SingleWorld () {
     
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const world = useSelector((state) => state.world);
     
@@ -62,6 +63,26 @@ export function SingleWorld () {
         setUpdateForm(false);
     }
 
+    const onClick = () => {
+        setWorldDescription(world.description);
+        setUpdateForm(true);
+    }
+
+    const contentSizer = (element) => {
+        element.target.style.height = "1px";
+        element.target.style.width = "50%";
+        element.target.style.height = (25 + element.target.scrollHeight) + "px";
+    }
+
+    const onDelConfirm = () => {
+        dispatch(deleteWorld(world.id));
+        navigate('/worlds');
+    }
+
+    const onDelCancel = () => {
+        setUpdateForm(false);
+    }
+
     if(!updateForm){
         return(
             <div className="single-world">
@@ -69,7 +90,7 @@ export function SingleWorld () {
                 <img className="campaign-image" src={world.imageUrl}/>
                 <p>Description: {world.description}</p>
                 <button className='edit'
-                    onClick={() => setUpdateForm(true)}>
+                    onClick={onClick}>
                         Edit Campaign
                 </button>
                 <Posts />
@@ -83,14 +104,14 @@ export function SingleWorld () {
                     >
 
                         <label htmlFor="name">Name</label>
-                        <input name="name" onChange={onChange} />
+                        <input name="name" onChange={onChange} placeholder={world.name}/>
                         <p>
                             <label htmlFor="description">Overview</label>
-                            <input name="description" onChange={onChange} />
+                            <textarea name="description" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={worldDescription}/>
                         </p>
                         <p>
                             <label htmlFor="imageUrl">ImageUrl</label>
-                            <input name="imageUrl" onChange={onChange} />
+                            <input name="imageUrl" onChange={onChange} placeholder="optional"/>
                         </p>
                         <div>
                             <button type="submit">
@@ -101,12 +122,10 @@ export function SingleWorld () {
                             </button>
                         </div>
                     </form>
-                    <Link to ={`/worlds`}>
-                        <button className='remove'
-                            onClick={() => dispatch(deleteWorld(world.id))}>
-                                Delete Campaign
-                        </button>
-                    </Link>
+                    <button className='remove'
+                        onClick={() => window.confirm('Are you sure you wish to Delete this campaign? This action is permanent.') ? onDelConfirm() : onDelCancel()}>
+                            Delete Campaign
+                    </button>
                 </div>
             )
         }
