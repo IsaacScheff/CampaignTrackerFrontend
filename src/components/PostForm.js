@@ -54,10 +54,17 @@ const PostForm = ({formSubmit}) => {
             UserId: 1,              
             WorldId: worldId,
         }
+        //console.log(post);
         dispatch(createPost(post));
         dispatch(fetchPostTypes(worldId));
         onClose();
         formSubmit(false);
+    }
+
+    const contentSizer = (element) => {
+        element.target.style.height = "1px";
+        element.target.style.width = "50%";
+        element.target.style.height = (25 + element.target.scrollHeight) + "px";
     }
 
     return (
@@ -69,7 +76,7 @@ const PostForm = ({formSubmit}) => {
             <input name="title" onChange={onChange} value={postTitle}/>
             <p>
                 <label htmlFor="content">Content</label>
-                <input name="content" onChange={onChange} value={postContent}/>
+                <textarea name="content" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={postContent}/>
             </p>
             <p>
                 <label htmlFor="type">Category</label>

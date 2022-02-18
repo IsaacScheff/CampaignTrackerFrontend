@@ -62,6 +62,12 @@ const WorldForm = () => {
         dispatch(clearWorldError());
     }
 
+    const contentSizer = (element) => {
+        element.target.style.height = "1px";
+        element.target.style.width = "50%";
+        element.target.style.height = (25 + element.target.scrollHeight) + "px";
+    }
+
     if(!worldError){
         return (
             <div>
@@ -74,7 +80,7 @@ const WorldForm = () => {
                     <input name="name" onChange={onChange} value={worldName}/>
                     <p>
                         <label htmlFor="description">Description</label>
-                        <input name="description" onChange={onChange} value={worldDescription}/>
+                        <textarea name="description" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={worldDescription}/>
                     </p>
                     <p>
                         <label htmlFor="imageUrl">ImageUrl</label>

@@ -17,8 +17,11 @@ export function SingleWorld () {
     let { worldId } = useParams();
 
     useEffect(()=>{
-        dispatch(fetchSingleWorld(worldId))
-    }, [dispatch, worldId])
+        dispatch(fetchSingleWorld(worldId));
+        setWorldDescription(world.description);
+        setWorldName(world.name);
+        setWorldImage(world.imageUrl);
+    }, [dispatch, worldId, world.description, world.name, world.imageUrl]);
 
     const [updateForm, setUpdateForm] = useState(false);
     const [worldDescription, setWorldDescription] = useState("");

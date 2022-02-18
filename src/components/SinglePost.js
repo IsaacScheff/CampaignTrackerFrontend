@@ -24,8 +24,12 @@ export function SinglePost () {
     let { worldId } = useParams();
 
     useEffect(()=>{
-        dispatch(fetchSinglePost(postId))
-    }, [dispatch, postId]);
+        dispatch(fetchSinglePost(postId));
+        setPostContent(post.content);
+        setPostTitle(post.title);
+        setPostType(post.type);
+        setPostImage(post.imageUrl);
+    }, [dispatch, postId, post.content, post.type, post.title, post.imageUrl]);
 
     const onChange = (event) => {
         switch (event.target.name){

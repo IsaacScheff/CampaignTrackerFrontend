@@ -44,6 +44,7 @@ const CommentForm = () => {
             UserId: 1,               
             PostId: postId
         }
+        console.log(comment);
         dispatch(createComment(comment));
         onClose();
     }
