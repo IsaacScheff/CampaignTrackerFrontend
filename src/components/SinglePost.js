@@ -5,6 +5,10 @@ import { fetchSinglePost, updatePost } from "../redux/singlePost";
 import {  useParams, useNavigate  } from "react-router-dom";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
+import { ButtonGroup, Button, TextField, Paper } from "@mui/material";
+import SaveIcon  from "@mui/icons-material/Save";
+import CancelIcon from '@mui/icons-material/Cancel';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 export function SinglePost () {
@@ -24,8 +28,12 @@ export function SinglePost () {
     let { worldId } = useParams();
 
     useEffect(()=>{
-        dispatch(fetchSinglePost(postId))
-    }, [dispatch, postId]);
+        dispatch(fetchSinglePost(postId));
+        setPostContent(post.content);
+        setPostTitle(post.title);
+        setPostType(post.type);
+        setPostImage(post.imageUrl);
+    }, [dispatch, postId, post.content, post.type, post.title, post.imageUrl]);
 
     const onChange = (event) => {
         switch (event.target.name){
@@ -87,55 +95,81 @@ export function SinglePost () {
     
     if(!updateForm){
         return(
-            <div className="single-post">
-                 <button className='edit'
-                    onClick={onClick}>
-                        Edit Post
-                </button>
-                <h3>{post.title}</h3>
-                <p>{post.content}</p>
-                <p>{post.type}</p>
-                Comments:
-                <Comments />
-                <CommentForm />
+            <div>
+                <Paper 
+                    className="single-post"
+                    sx = {{
+                        width: "50%",
+                        margin: "auto",
+                        marginTop: "50px",
+                        backgroundColor: "#f0bf7a"
+
+                }}>
+                    <Button 
+                        color="warning"
+                        className='edit'
+                        variant="contained"
+                        onClick={onClick}
+                        sx={{
+                            marginBottom: "10px",
+                            float: "right"
+                        }}>
+                            Edit 
+                    </Button>
+                    <h3 className="post-header">
+                        {post.title}
+                        <div className='post-type'>{post.type}</div>
+                    </h3>
+                    <p className="post-content">{post.content}</p>
+                </Paper>
+                    <Comments />
+                    <CommentForm />
             </div>
             )
         }else{
             return (
-                <div className="single-post">
+                <Paper 
+                    className="single-post"
+                    sx={{
+                        width: "50%",
+                        margin: "auto",
+                        marginTop: "50px",
+                        backgroundColor: "#f0bf7a"
+                    }}
+                >
                     <form
                         onSubmit={onSubmit}
                     >
-
-                        <label htmlFor="title">Title</label>
-                        <input name="title" onChange={onChange} placeholder={post.title}/>
+                        <h1>
+                            Edit Post
+                        </h1>
+                        <TextField label="Title" name="title" onChange={onChange} placeholder={post.title}/>
                         <p>
-                            <label htmlFor="content">Content</label>
                             <textarea name="content" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={postContent}/>
                         </p>
                         <p>
-                            <label htmlFor="type">Category</label>
-                            <input name="type" onChange={onChange} placeholder={post.type}/>
+                            <TextField label="Category" name="type" onChange={onChange} placeholder={post.type}/>
                         </p>
-                        <p>
-                            <label htmlFor="imageUrl">ImageUrl</label>
-                            <input name="imageUrl" onChange={onChange} placeholder="optional"/>
-                        </p>
+                        <TextField label="ImageURL" name="imageUrl" onChange={onChange} placeholder="optional"/>
                         <div>
-                            <button type="submit">
-                                Update
-                            </button>
-                            <button type="reset" onClick={onCancel}>
-                                Cancel
-                            </button>
+                            <ButtonGroup variant="contained" sx={{margin: "10px"}}> 
+                                <Button startIcon={<SaveIcon />} type="submit">
+                                    Update
+                                </Button>
+                                <Button startIcon={<CancelIcon />} color="secondary" type="reset" onClick={onCancel}>
+                                    Cancel
+                                </Button>
+                            </ButtonGroup>
                         </div>
-                
                     </form>
-                    <button className='remove'
+                    <h4>
+                        or
+                    </h4>
+                    <Button startIcon={<DeleteIcon />} variant="contained" color="warning" className='remove' sx={{marginBottom: "10px"}}
                         onClick={() => window.confirm('Are you sure you wish to Delete this post? This action is permanent.') ? onDelConfirm() : onDelCancel()}>
                             Delete Post
-                    </button>
-                </div>
+                    </Button>
+                </Paper>
             )
         }
 

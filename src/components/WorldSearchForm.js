@@ -3,6 +3,8 @@ import {  useNavigate  } from "react-router-dom";
 import axios from "axios";
 import SearchErrorMessage from "./SearchErrorMessage";
 import api from "../dev";
+import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment, TextField, Container } from "@mui/material";
 
 
 const WorldSearchForm = () => {
@@ -28,18 +30,25 @@ const WorldSearchForm = () => {
     }
 
     return (
-        <form onSubmit={onSubmit} className="world-search-form">
-          <label htmlFor="campaign-search">Search</label>
-          <input 
-            name="name" 
-            onChange={onChange} 
-            value={searchTerm}
-            placeholder="Campaign title"
-            />
-            <div className="world-search-failed">
-                {searchError ? <SearchErrorMessage /> : null}
-            </div>
-        </form>
+            <form onSubmit={onSubmit} className="world-search-form">
+                    <TextField 
+                        InputProps={{
+                            endAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon />
+                            </InputAdornment>
+                            )
+                        }}
+                        name="name" 
+                        onChange={onChange} 
+                        value={searchTerm}
+                        placeholder="Campaign title"
+                        variant="outlined"
+                    />
+                <div className="world-search-failed">
+                    {searchError ? <SearchErrorMessage /> : null}
+                </div>
+            </form>
     );
   };
   

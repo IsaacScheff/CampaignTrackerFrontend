@@ -3,6 +3,7 @@ import { createPost } from "../redux/posts";
 import { useDispatch } from "react-redux";
 import {  useParams  } from "react-router-dom";
 import { fetchPostTypes } from "../redux/postTypes";
+import { ButtonGroup, Button, TextField, Paper } from "@mui/material";
 
 const PostForm = ({formSubmit}) => {
 
@@ -54,38 +55,68 @@ const PostForm = ({formSubmit}) => {
             UserId: 1,              
             WorldId: worldId,
         }
+        //console.log(post);
         dispatch(createPost(post));
         dispatch(fetchPostTypes(worldId));
         onClose();
         formSubmit(false);
     }
 
-    return (
-        <form
-            onSubmit={onSubmit}
-        >
+    const contentSizer = (element) => {
+        element.target.style.height = "1px";
+        element.target.style.width = "50%";
+        element.target.style.height = (25 + element.target.scrollHeight) + "px";
+    }
 
-            <label htmlFor="title">Title</label>
-            <input name="title" onChange={onChange} value={postTitle}/>
-            <p>
-                <label htmlFor="content">Content</label>
-                <input name="content" onChange={onChange} value={postContent}/>
-            </p>
-            <p>
-                <label htmlFor="type">Category</label>
-                <input name="type" onChange={onChange} value={postType}/>
-            </p>
-            <p>
-                <label htmlFor="imageUrl">ImageUrl</label>
-                <input name="imageUrl" onChange={onChange} value={postImage} placeholder='optional'/>
-            </p>
-            <div>
-                <button type="submit" disabled={postTitle.length < 1 || postContent.length < 1 || postType.length < 1}>
-                    Post!
-                </button>
-            </div>
-	
-	    </form>
+    return (
+        <Paper sx={{
+            width: "50%",
+            margin: "auto",
+            backgroundColor: "#f0bf7a"
+        }}>
+            <form
+                onSubmit={onSubmit}
+            >
+
+                <h1>
+                    Create New Post
+                </h1>
+                <TextField label="Title" name="title" onChange={onChange} value={postTitle}/>
+                <p>
+                    <textarea 
+                        name="content" 
+                        onClick={contentSizer} 
+                        onKeyUp={contentSizer} 
+                        onChange={onChange} 
+                        value={postContent}
+                        placeholder="Content"
+                    />
+                </p>
+                <p>
+                    <TextField label="Category" name="type" onChange={onChange} value={postType}/>
+                </p>
+                    <TextField label="ImageURL" name="imageUrl" onChange={onChange} value={postImage} placeholder='optional'/>
+                <div>
+                    <ButtonGroup>
+                        <Button 
+                            variant="contained"
+                            type="submit" 
+                            disabled={postTitle.length < 1 || postContent.length < 1 || postType.length < 1}
+                            sx={{marginTop: "10px", marginBottom: "10px"}}
+                        >
+                            Post!
+                        </Button>
+                        <Button 
+                            onClick={() => formSubmit(false)}
+                            variant="contained"
+                            color="secondary"
+                            sx={{marginTop: "10px", marginBottom: "10px"}}>
+                            Cancel
+                        </Button>
+                    </ButtonGroup>
+                </div>
+            </form>
+        </Paper>
     );
   };
   

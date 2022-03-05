@@ -4,6 +4,10 @@ import { fetchSingleWorld, updateWorld } from "../redux/singleWorld";
 import { deleteWorld } from "../redux/worlds";
 import {  useParams, useNavigate  } from "react-router-dom";
 import Posts from "./Posts";
+import { ButtonGroup, Button, TextField, Paper } from "@mui/material";
+import SaveIcon  from "@mui/icons-material/Save";
+import CancelIcon from '@mui/icons-material/Cancel';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -17,8 +21,11 @@ export function SingleWorld () {
     let { worldId } = useParams();
 
     useEffect(()=>{
-        dispatch(fetchSingleWorld(worldId))
-    }, [dispatch, worldId])
+        dispatch(fetchSingleWorld(worldId));
+        setWorldDescription(world.description);
+        setWorldName(world.name);
+        setWorldImage(world.imageUrl);
+    }, [dispatch, worldId, world.description, world.name, world.imageUrl]);
 
     const [updateForm, setUpdateForm] = useState(false);
     const [worldDescription, setWorldDescription] = useState("");
@@ -85,48 +92,73 @@ export function SingleWorld () {
 
     if(!updateForm){
         return(
-            <div className="single-world">
-                <p className='campaign-title'>{world.name}</p>
-                <img className="campaign-image" src={world.imageUrl}/>
-                <p>Description: {world.description}</p>
-                <button className='edit'
-                    onClick={onClick}>
-                        Edit Campaign
-                </button>
+            <div>
+                <Paper sx={{
+                    width: "75%",
+                    margin: "auto",
+                    marginTop: "10px",
+                    backgroundColor: "#8a6d45",
+                    paddingBottom: "10px"
+                }}>
+                    <Button 
+                        variant="contained"
+                        color="warning"
+                        className='edit'
+                        onClick={onClick}
+                        sx={{
+                            marginBottom: "10px",
+                            float: "right"
+                        }}>
+                            Edit
+                    </Button>
+                    <p className='campaign-title'>{world.name}</p>
+                    <img className="campaign-image" src={world.imageUrl}/>
+                    <p>{world.description}</p>
+                    </Paper>
                 <Posts />
             </div>
             )
         }else{
             return (
-                <div className="single-world">
+                <Paper 
+                    className="single-world"
+                    sx={{
+                        width: "50%",
+                        margin: "auto",
+                        marginTop: "50px",
+                        backgroundColor: "#f0bf7a"
+                    }}
+                >
                     <form
                         onSubmit={onSubmit}
                     >
-
-                        <label htmlFor="name">Name</label>
-                        <input name="name" onChange={onChange} placeholder={world.name}/>
+                        <h1>
+                            Edit Campaign
+                        </h1>
+                        <TextField label="Name" variant="outlined" name="name" onChange={onChange} placeholder={world.name}/>
                         <p>
-                            <label htmlFor="description">Overview</label>
                             <textarea name="description" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={worldDescription}/>
                         </p>
-                        <p>
-                            <label htmlFor="imageUrl">ImageUrl</label>
-                            <input name="imageUrl" onChange={onChange} placeholder="optional"/>
-                        </p>
+                        <TextField label="ImageUrl" variant="outlined" onChange={onChange} placeholder="optional"/>
                         <div>
-                            <button type="submit">
-                                Update
-                            </button>
-                            <button type="reset" onClick={onCancel}>
-                                Cancel
-                            </button>
+                            <ButtonGroup variant="contained" sx={{margin: "10px"}}>
+                                <Button startIcon={<SaveIcon />}  type="submit">
+                                    Update
+                                </Button>
+                                <Button startIcon={<CancelIcon />} color="secondary" type="reset" onClick={onCancel}>
+                                    Cancel
+                                </Button>
+                            </ButtonGroup>
                         </div>
                     </form>
-                    <button className='remove'
+                    <h4>
+                        or
+                    </h4>
+                    <Button startIcon={<DeleteIcon />} variant="contained" color="warning" className='remove' sx={{marginBottom: "10px"}}
                         onClick={() => window.confirm('Are you sure you wish to Delete this campaign? This action is permanent.') ? onDelConfirm() : onDelCancel()}>
                             Delete Campaign
-                    </button>
-                </div>
+                    </Button>
+                </Paper>
             )
         }
 
