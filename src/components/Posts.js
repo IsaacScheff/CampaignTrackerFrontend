@@ -5,6 +5,7 @@ import {  useParams  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PostForm from "./PostForm";
 import PostCategoryPicker from "./PostCategoryPicker";
+import { ButtonGroup, Button, TextField, Paper } from "@mui/material";
 
 
 export function Posts () {
@@ -28,14 +29,26 @@ export function Posts () {
     if(!newPost){
     return (
         <div id='posts'> 
+            <Button 
+                type="show-post-form" 
+                onClick={onClick}
+                variant="contained"
+                sx={{
+                    margin: "10px"
+                }}
+            >
+                Create New Post!
+            </Button>
             <PostCategoryPicker />
             <div className='post-container'>
         {
             posts.map(post => (
                 
              <div className='post' key={post.id}>
-                <h3 className='post-title'>{post.title}</h3>
-                <p className='post-type'>{post.type}</p>
+                <h3>
+                    <div className='post-title'>{post.title}</div>
+                    <div className='post-type'>{post.type}</div>
+                </h3>
                 <p>{post.content}</p>
                 <p>
                     <Link to={`/${worldId}/posts/${post.id}`}>
@@ -46,18 +59,12 @@ export function Posts () {
             ))
         }   
             </div>
-            <button type="show-post-form" onClick={onClick}>
-                Create New Post!
-            </button>
         </div>
     )
     }else{
         return(
             <div>
                 <PostForm formSubmit={setNewPost}/>
-                <button type="reset" onClick={onClick}>
-                Cancel
-                </button>
             </div>
         )
     }

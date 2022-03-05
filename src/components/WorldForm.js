@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {  useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../dev";
+import { Button, TextField, Paper } from "@mui/material";
 
 const WorldForm = () => {
 
@@ -70,30 +71,39 @@ const WorldForm = () => {
 
     if(!worldError){
         return (
-            <div>
+            <Paper sx={{
+                width: "50%",
+                margin: "auto",
+                backgroundColor: "#f0bf7a"
+            }}>
                 <form
                     onSubmit={onSubmit}
                     className="new-world-form"
                 >
-
-                    <label htmlFor="name">Name</label>
-                    <input name="name" onChange={onChange} value={worldName}/>
+                    <h1>
+                        Create New Campaign
+                    </h1>
+                    <TextField label="Name" name="name" variant="filled" onChange={onChange} value={worldName}/>
                     <p>
-                        <label htmlFor="description">Description</label>
-                        <textarea name="description" onClick={contentSizer} onKeyUp={contentSizer} onChange={onChange} value={worldDescription}/>
+                        <textarea 
+                            name="description" 
+                            onClick={contentSizer} 
+                            onKeyUp={contentSizer} 
+                            onChange={onChange} 
+                            value={worldDescription} 
+                            placeholder="description"
+                        />
                     </p>
-                    <p>
-                        <label htmlFor="imageUrl">ImageUrl</label>
-                        <input name="imageUrl" onChange={onChange} placeholder="optional"/>
-                    </p>
+                    <TextField  label="imageUrl" name="imageUrl" variant="filled" onChange={onChange} placeholder="optional"/>
                     <div>
-                        <button type="submit" disabled={worldName.length < 1}>
+                        <Button variant="contained" type="submit" disabled={worldName.length < 1} 
+                            sx={{marginTop: "10px", marginBottom: "10px"}}
+                        >
                             Create!
-                        </button>
+                        </Button>
                     </div>
-
                 </form>
-            </div>
+            </Paper>
         );
         }else{
             return (
