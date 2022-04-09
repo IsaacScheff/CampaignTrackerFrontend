@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchWorlds } from "../redux/worlds";
 import { Link } from "react-router-dom";
 import WorldSearchForm from "./WorldSearchForm";
+import RandomWorldButton from "./RandomWorldButton";
 
 
 export class WorldList extends React.Component {
@@ -12,6 +13,7 @@ export class WorldList extends React.Component {
       <div>
         <p className="world-list-header">Campaign List</p>
         <WorldSearchForm />
+        <RandomWorldButton worlds={this.props.worlds}/>
         {this.props.worlds.map(world => (
           <div key={world.id} className="world-list">
             <Link to ={`/worlds/${world.id}`}>
